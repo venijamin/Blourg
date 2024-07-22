@@ -4,6 +4,7 @@ import (
 	"backend/model"
 	"backend/repository"
 	"encoding/json"
+	"log"
 	"net/http"
 )
 
@@ -26,13 +27,15 @@ func LoginUser(w http.ResponseWriter, r *http.Request) {
 	var userLogin model.UserLoginDTO
 	_ = json.NewDecoder(r.Body).Decode(&userLogin)
 
-	// Create a session token to keep the user logged in
-
-	userRepository.LoginUser(userLogin.Email, userLogin.Username, userLogin.Password)
+	sessionToken, err := userRepository.LoginUser(userLogin.Email, userLogin.Username, userLogin.Password)
+	if err != nil {
+		log.Println(err)
+	}
+	json.NewEncoder(w).Encode(sessionToken)
 }
 
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
-	var username string
-	_ = json.NewDecoder(r.Body).Decode(&username)
-	userRepository.DeleteUser(username)
+	var userDelete model.UserDeleteDTO
+	_ = json.NewDecoder(r.Body).Decode(&userDelete)
+	json.NewEncoder(w).Encode(userRepository.DeleteUser(userDelete))
 }

@@ -3,24 +3,15 @@ package main
 import (
 	"backend/security"
 	"backend/service"
-	"github.com/joho/godotenv"
+	"github.com/gorilla/mux"
 	"log"
 	"net/http"
-	"os"
-
-	"github.com/gorilla/mux"
 )
 
 func main() {
-	// Connect to database
-	// Load the connection string
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-	connectionString := os.Getenv("ConnectionString")
-	security.OpenConnection(connectionString)
+	security.ConnectToDB()
 
+	// Controller mappings
 	router := mux.NewRouter()
 	router.HandleFunc("/users", service.GetAllUsers).Methods("GET")
 	router.HandleFunc("/users/register", service.RegisterUser).Methods("POST")

@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"backend/model"
+	"backend/model/User"
 	"backend/security"
 	"errors"
 )
@@ -11,21 +11,21 @@ import (
 type UserRepository struct {
 }
 
-func (repo UserRepository) GetAllUsers() []model.User {
-	var users []model.User
+func (repo UserRepository) GetAllUsers() []User.User {
+	var users []User.User
 	security.GetMainDB().Find(&users)
 
 	return users
 }
 
-func (repo UserRepository) GetUserByUsername(username string) model.User {
-	var user model.User
+func (repo UserRepository) GetUserByUsername(username string) User.User {
+	var user User.User
 	security.GetMainDB().Where("username = ?", username).Find(&user)
 	return user
 }
 
-func (repo UserRepository) RegisterUser(email string, username string, password string) model.User {
-	var newUser model.User
+func (repo UserRepository) RegisterUser(email string, username string, password string) User.User {
+	var newUser User.User
 	newUser.Email = email
 	newUser.Username = username
 	newUser.Password = security.HashPassword(password)
@@ -42,7 +42,7 @@ func (repo UserRepository) LoginUser(email string, username string, password str
 	if security.VerifyPassword(password, user.Password) {
 
 		sessionToken, hashedSessionToken := security.GenerateSessionToken()
-		security.GetUserSessionsDB().Create(&model.UserSession{
+		security.GetUserSessionsDB().Create(&User.UserSession{
 			Username:     username,
 			SessionToken: hashedSessionToken,
 		})
@@ -66,13 +66,13 @@ func (repo UserRepository) ChangePassword(email string, username string, passwor
 
 // DeleteUser checks if the user sessionToken and the passwords are correct to validate the delete process
 // TODO: fix it doesn't work well
-func (repo UserRepository) DeleteUser(userDelete model.UserDeleteDTO) bool {
+func (repo UserRepository) DeleteUser(userDelete User.UserDeleteDTO) bool {
 	username := userDelete.Username
 	password := userDelete.Password
 	sessionToken := userDelete.SessionToken
 
 	user := repo.GetUserByUsername(username)
-	var userSessions []model.UserSession
+	var userSessions []User.UserSession
 	security.GetUserSessionsDB().Where("username = ?", username).Find(&userSessions)
 
 	for _, userSession := range userSessions {

@@ -1,6 +1,6 @@
-package model
+package User
 
 type UserSession struct {
-	SessionToken string `json:"sessionToken"`
+	SessionToken string `json:"session_token"`
 	Username     string `json:"username"`
 }

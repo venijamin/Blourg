@@ -1,7 +1,9 @@
 package security
 
 import (
-	"backend/model"
+	"backend/model/Comment"
+	"backend/model/Post"
+	"backend/model/User"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -37,18 +39,29 @@ func ConnectToDB() {
 
 func migrateSchemaUserSessionsDB() {
 	// Migrate the schema
-	err := userSessionsDB.AutoMigrate(&model.UserSession{})
+	err := userSessionsDB.AutoMigrate(&User.UserSession{})
 	if err != nil {
 		log.Fatalf("failed to migrate schema: %v", err)
 	}
 }
 
+// Whenever you want to add a new model to the database as a table you have to specify it here
 func migrateSchemaMainDB() {
 	// Migrate the schema
-	err := mainDB.AutoMigrate(&model.User{})
+	var err error
+	err = mainDB.AutoMigrate(&User.User{})
 	if err != nil {
 		log.Fatalf("failed to migrate schema: %v", err)
 	}
+	err = mainDB.AutoMigrate(&Post.Post{})
+	if err != nil {
+		log.Fatalf("failed to migrate schema: %v", err)
+	}
+	err = mainDB.AutoMigrate(&Comment.Comment{})
+	if err != nil {
+		log.Fatalf("failed to migrate schema: %v", err)
+	}
+
 }
 
 func openConnection(connectionString string) *gorm.DB {

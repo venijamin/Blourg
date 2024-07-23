@@ -1,7 +1,7 @@
 package service
 
 import (
-	"backend/model"
+	"backend/model/User"
 	"backend/repository"
 	"encoding/json"
 	"log"
@@ -15,7 +15,7 @@ func GetAllUsers(w http.ResponseWriter, r *http.Request) {
 }
 
 func RegisterUser(w http.ResponseWriter, r *http.Request) {
-	var newUser model.User
+	var newUser User.User
 	_ = json.NewDecoder(r.Body).Decode(&newUser)
 
 	// Add new user to database
@@ -24,7 +24,7 @@ func RegisterUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func LoginUser(w http.ResponseWriter, r *http.Request) {
-	var userLogin model.UserLoginDTO
+	var userLogin User.UserLoginDTO
 	_ = json.NewDecoder(r.Body).Decode(&userLogin)
 
 	sessionToken, err := userRepository.LoginUser(userLogin.Email, userLogin.Username, userLogin.Password)
@@ -35,7 +35,7 @@ func LoginUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
-	var userDelete model.UserDeleteDTO
+	var userDelete User.UserDeleteDTO
 	_ = json.NewDecoder(r.Body).Decode(&userDelete)
 	json.NewEncoder(w).Encode(userRepository.DeleteUser(userDelete))
 }

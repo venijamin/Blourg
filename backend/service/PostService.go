@@ -36,3 +36,11 @@ func DeletePost(w http.ResponseWriter, r *http.Request) {
 	_ = json.NewDecoder(r.Body).Decode(&postId)
 
 }
+
+func GetAllCommentsForPost(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	postId, _ := vars["postId"]
+	_ = json.NewDecoder(r.Body).Decode(&postId)
+
+	json.NewEncoder(w).Encode(postRepository.GetAllCommentsForPost(postId))
+}

@@ -21,7 +21,9 @@ func main() {
 	router.HandleFunc("/comments", service.CreateComment).Methods("POST")
 	router.HandleFunc("/posts", service.GetAllPosts).Methods("GET")
 	router.HandleFunc("/posts", service.CreatePost).Methods("POST")
-	router.HandleFunc("/posts/{postId}", service.GetPostById).Methods("POST")
+	router.HandleFunc("/posts/{postId}", service.GetPostById).Methods("GET")
+	router.HandleFunc("/posts/{postId}", service.DeletePost).Methods("DELETE")
+	router.HandleFunc("/posts/{postId}/comments", service.GetAllCommentsForPost).Methods("GET")
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 }

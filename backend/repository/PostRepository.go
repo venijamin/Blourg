@@ -35,7 +35,7 @@ func (repo PostRepository) CreatePost(dto Post.PostCreationDTO) Post.Post {
 	return post
 }
 
-func (repo CommentRepository) GetAllCommentsForPost(postId string) []Comment.Comment {
+func (repo PostRepository) GetAllCommentsForPost(postId string) []Comment.Comment {
 	var comments []Comment.Comment
 	security.GetMainDB().Where("post_id = ?", postId).Find(&comments)
 

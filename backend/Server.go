@@ -8,11 +8,29 @@ import (
 	"net/http"
 )
 
+// CORS middleware function
+func CORS(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+
+		// Handle preflight OPTIONS request
+		if r.Method == http.MethodOptions {
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
+}
+
 func main() {
 	security.ConnectToDB()
 
-	// Controller mappings
+	// Create a new router
 	router := mux.NewRouter()
+
+	// Define your routes
 	router.HandleFunc("/users", service.GetAllUsers).Methods("GET")
 	router.HandleFunc("/users/register", service.RegisterUser).Methods("POST")
 	router.HandleFunc("/users/login", service.LoginUser).Methods("POST")
@@ -25,5 +43,9 @@ func main() {
 	router.HandleFunc("/posts/{postId}", service.DeletePost).Methods("DELETE")
 	router.HandleFunc("/posts/{postId}/comments", service.GetAllCommentsForPost).Methods("GET")
 
-	log.Fatal(http.ListenAndServe(":8080", router))
+	// Wrap the router with CORS middleware
+	corsRouter := CORS(router)
+
+	// Start the server
+	log.Fatal(http.ListenAndServe(":8080", corsRouter))
 }

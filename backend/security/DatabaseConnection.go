@@ -61,7 +61,6 @@ func migrateSchemaMainDB() {
 	if err != nil {
 		log.Fatalf("failed to migrate schema: %v", err)
 	}
-
 }
 
 func openConnection(connectionString string) *gorm.DB {

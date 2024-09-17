@@ -1,0 +1,31 @@
+/* Basic styling for the sidebar */
+.sidebar {
+  width: 10px; /* Initial width */
+  height: 100%;
+  padding: 20px;
+  background-color: lightgray;
+  transition: width 0.3s;
+  overflow: hidden;
+}
+
+/* Expanded sidebar on hover */
+.sidebar:hover {
+  width: 100px; /* Expanded width on hover */
+}
+
+/* Styling for the text container */
+.text-container {
+  width: 100%; /* Ensure it takes up the available space */
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* When the sidebar is at its minimal width (10px), use an icon */
+.sidebar.width-10px .text-container::before {
+  content: ''; /* Hide text */
+  display: inline-block;
+  width: 16px; /* Icon size */
+  height: 16px; /* Icon size */
+  background-size: contain; /* Ensure the icon fits */
+}
+
+/* Add a class to the sidebar when it's at 10px width using JavaScript */

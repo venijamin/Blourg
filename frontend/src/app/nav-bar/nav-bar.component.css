@@ -2,7 +2,6 @@
   display: flex;
   width: 100%;
   align-items: stretch;
-  background-color: lightgoldenrodyellow;
 
 }
 
@@ -17,6 +16,20 @@
 
   border-bottom-right-radius: 20%;
 }
+.sidebar-content {
+  margin-left: 20px;
+  height: 100%;
+}
+.sidebar-footer {
+  position: absolute;
+  bottom: 15px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+
+
+
 .borger-menu{
     width: 35px;
   height: 5px;
@@ -33,18 +46,7 @@
   z-index: 1; /* Sit behind the button */
 }
 
-.sidebar-button {
-  border: 1px solid rgba(0, 0, 0, 0.5); /* Outline */
-  border-left: none; /* Remove left side */
-  border-top: none;
-  box-shadow: -1px 0 0 rgba(0, 0, 0, 0), /* Left side transparent shadow */
-  5px 5px 5px rgba(0, 0, 0, 0.2); /* Original shadow */
-  background: rgba(28, 213, 219, 1); /* Solid background to obscure the background */
-  padding: 16px 24px 30px;
-  border-bottom-right-radius: 50%;
-  position: absolute;/* Position it above */
-  z-index: 2; /* Sit on top of the background */
-}
+
 
 #sidebar.active {
   margin-left: -250px;
@@ -79,19 +81,55 @@ a[data-toggle="collapse"] {
 
 .profile-bar {
   position: absolute;
+  align-items: center;
+  display: flex;
+  padding-left: 10px;
+  padding-bottom: 5px;
 
-  border-bottom-left-radius: 25%;
+  border-bottom-left-radius: 35%;
   outline: 1px solid rgba(0, 0, 0, 0.5); /* Outline */
   background: rgb(28, 213, 219);
   background: linear-gradient(198deg, rgba(28, 213, 219, 1) 0%, rgba(22, 222, 155, 1) 50%, rgba(173, 221, 231, 1) 100%);
   box-shadow: -5px 5px 5px rgba(0, 0, 0, 0.2);
-  padding: 25px;
 
 
   top: 0px; /* Adjust distance from the top */
   right: 0px; /* Adjust distance from the right */
 }
-.profile-bar-component{
 
+.sidebar-button {
+  border: 1px solid rgba(0, 0, 0, 0.5); /* Outline */
+  box-shadow: -1px 0 0 rgba(0, 0, 0, 0), /* Left side transparent shadow */
+  0px 5px 0px rgba(0, 0, 0, 0.2); /* Original shadow */
+  background: rgba(28, 213, 219, 1); /* Solid background to obscure the background */
+  padding: 10px;
+  margin: 10px;
+  border-radius: 30%;
+  z-index: 2; /* Sit on top of the background */
 }
+.sidebar-button:hover {
+  text-decoration: none;
+  transform: translateY(3px); /* Press down effect */
+  box-shadow: -1px 0 0 rgba(0, 0, 0, 0), /* Left side transparent shadow */
+  0px 2px 0px rgba(0, 0, 0, 0.2); /* Original shadow */
+
+  color: white;
+  background-color: rebeccapurple;
+}
+
+
+
+.profile-picture-frame {
+
+  border: 2px solid #4CAF50; /* Border width, style, and color */
+  margin: 10px; /* Space outside the border */
+  text-align: center; /* Centered text */
+  border-radius: 100%; /* Adjust the second percentage for height */
+
+
+  width: 50px;
+  background-size: cover;
+  background-position: center;
+}
+
 

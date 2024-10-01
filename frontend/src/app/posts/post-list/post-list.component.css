@@ -1,16 +1,18 @@
+.post-list{
+ width: 100vh;
+}
 .post{
   /* From https://css.glass */
   background: rgba(255, 255, 255, 0.16);
   border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(8.3px);
   -webkit-backdrop-filter: blur(8.3px);
   border: 1px solid rgba(0, 0, 0, 0.2);
 
 
-  padding: 20px;
-  width: 100%;
+  padding: 20px 40px;
 
   height: 200px;
-  margin: 20px
+  margin-bottom: 40px;
 }

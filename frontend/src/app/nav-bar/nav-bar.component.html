@@ -2,32 +2,16 @@
 <link rel="stylesheet" href="https://unpkg.com/7.css">
 <div class="wrapper">
   <nav id="sidebar" class="sidebar-background" [class.active]="sidebarActive">
-    <div class="sidebar-header">
-      <h3>Bootstrap Sidebar</h3>
+    <div class="sidebar-content">
+
+       <a class="sidebar-button" href="#">Portfolio</a>
+       <a class="sidebar-button" href="#">Contact</a>
+
+      <div class="sidebar-footer">
+        Blourg.com
+      </div>
     </div>
 
-    <ul class="list-unstyled components">
-      <p>Dummy Heading</p>
-      <li class="active">
-        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-        <ul class="collapse list-unstyled" id="homeSubmenu">
-          <li><a href="#">Home 1</a></li>
-          <li><a href="#">Home 2</a></li>
-          <li><a href="#">Home 3</a></li>
-        </ul>
-      </li>
-      <li><a href="#">About</a></li>
-      <li>
-        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
-        <ul class="collapse list-unstyled" id="pageSubmenu">
-          <li><a href="#">Page 1</a></li>
-          <li><a href="#">Page 2</a></li>
-          <li><a href="#">Page 3</a></li>
-        </ul>
-      </li>
-      <li><a href="#">Portfolio</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
   </nav>
 
   <div id="content">
@@ -46,10 +30,9 @@
     <app-post-list></app-post-list>
   </div>
   <div class="profile-bar">
-    <div class="profile-bar-component">
-      <a>Profile</a>
-    </div>
-    <div class="profile-bar-component">test</div>
+    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" class="profile-picture-frame" alt="Profile">
+    <a class="profile-bar-component sidebar-button">New Post</a>
+    <a class="profile-bar-component sidebar-button">Settings</a>
   </div>
 
 

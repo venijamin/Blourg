@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
 import {PostListComponent} from "../posts/post-list/post-list.component";
+import {RouterLink, RouterLinkActive} from "@angular/router";
 
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
   imports: [
-    PostListComponent
+    PostListComponent,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css'

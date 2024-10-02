@@ -6,6 +6,7 @@
 
        <a class="sidebar-button" href="#">Portfolio</a>
        <a class="sidebar-button" href="#">Contact</a>
+      <a class="sidebar-button">Settings</a>
 
       <div class="sidebar-footer">
         Blourg.com
@@ -16,14 +17,16 @@
 
   <div id="content">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid sidebar-button">
-        <a type="button" (click)="toggleSidebar()" class="btn btn-info">
+      <a type="button" (click)="toggleSidebar()" class="btn btn-info">
+      <div class="container-fluid borger-button">
           <div class="borger-menu"></div>
           <div class="borger-menu"></div>
           <div class="borger-menu"></div>
+
           <i class="fas fa-align-left"></i>
-        </a>
       </div>
+
+      </a>
     </nav>
   </div>
   <div class="content-wrapper">
@@ -32,7 +35,6 @@
   <div class="profile-bar">
     <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png" class="profile-picture-frame" alt="Profile">
     <a class="profile-bar-component sidebar-button">New Post</a>
-    <a class="profile-bar-component sidebar-button">Settings</a>
   </div>
 
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {PostListComponent} from "../posts/post-list/post-list.component";
 import {RouterLink, RouterLinkActive} from "@angular/router";
+import {PostFormComponent} from "../posts/post-form/post-form.component";
 
 @Component({
   selector: 'app-nav-bar',
@@ -8,7 +9,8 @@ import {RouterLink, RouterLinkActive} from "@angular/router";
   imports: [
     PostListComponent,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    PostFormComponent
   ],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css'

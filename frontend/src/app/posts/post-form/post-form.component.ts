@@ -14,7 +14,7 @@ import {FormsModule} from "@angular/forms";
 
 
 export class PostFormComponent implements OnInit {
-  username: string = '';
+  username: string = 'smerg';
   title: string = '';
   body: string = '';
 
@@ -27,7 +27,9 @@ export class PostFormComponent implements OnInit {
       body: this.body,
     };
 
-    this.postService.createPost(newPost).subscribe()
+
+    console.log(newPost)
+    this.postService.createPost(JSON.stringify(newPost)).subscribe()
   }
 
   deletePost(postId: string) {

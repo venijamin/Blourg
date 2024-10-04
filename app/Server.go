@@ -4,6 +4,7 @@ import (
 	"backend/security"
 	"backend/service"
 	"github.com/gorilla/mux"
+	"html/template"
 	"log"
 	"net/http"
 )
@@ -31,6 +32,16 @@ func main() {
 	router := mux.NewRouter()
 
 	// Define your routes
+
+	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		tmpl, err := template.ParseFiles("template/index.html")
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		tmpl.Execute(w, nil)
+	})
+
 	router.HandleFunc("/users", service.GetAllUsers).Methods("GET")
 	router.HandleFunc("/users/register", service.RegisterUser).Methods("POST")
 	router.HandleFunc("/users/login", service.LoginUser).Methods("POST")

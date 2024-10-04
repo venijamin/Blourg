@@ -4,14 +4,26 @@ import (
 	"backend/model/User"
 	"backend/repository"
 	"encoding/json"
+	"html/template"
 	"log"
 	"net/http"
 )
 
 var userRepository repository.UserRepository
 
+var userTemplate = template.Must(template.ParseFiles("template/user-list.html"))
+
 func GetAllUsers(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(userRepository.GetAllUsers())
+	users := userRepository.GetAllUsers()
+
+	w.Header().Set("Content-Type", "text/html")  // Set content type to text/html
+	w.Header().Set("HX-Trigger", "postsUpdated") // Optional: Trigger an HTMX event
+
+	if err := userTemplate.Execute(w, users); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 }
 
 func RegisterUser(w http.ResponseWriter, r *http.Request) {

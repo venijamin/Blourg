@@ -5,13 +5,25 @@ import (
 	"backend/repository"
 	"encoding/json"
 	"github.com/gorilla/mux"
+	"html/template"
 	"net/http"
 )
 
 var postRepository repository.PostRepository
 
+var postTemplate = template.Must(template.ParseFiles("template/post-list.html"))
+
 func GetAllPosts(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(postRepository.GetAllPosts())
+	posts := postRepository.GetAllPosts() // Fetch the posts from your repository
+
+	w.Header().Set("Content-Type", "text/html")  // Set content type to text/html
+	w.Header().Set("HX-Trigger", "postsUpdated") // Optional: Trigger an HTMX event
+
+	if err := postTemplate.Execute(w, posts); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 }
 
 func GetPostById(w http.ResponseWriter, r *http.Request) {

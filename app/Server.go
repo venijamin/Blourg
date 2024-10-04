@@ -7,6 +7,7 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"strings"
 )
 
 // CORS middleware function
@@ -31,10 +32,22 @@ func main() {
 	// Create a new router
 	router := mux.NewRouter()
 
+	router.PathPrefix("/ui/").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if strings.HasSuffix(r.URL.Path, ".css") {
+			// Set the correct MIME type for CSS files
+			w.Header().Set("Content-Type", "text/css")
+
+			// Serve the CSS file
+			http.StripPrefix("/ui/", http.FileServer(http.Dir("ui"))).ServeHTTP(w, r)
+		} else {
+			http.NotFound(w, r) // Return 404 for non-CSS files
+		}
+	})
+
 	// Define your routes
 
 	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		tmpl, err := template.ParseFiles("template/index.html")
+		tmpl, err := template.ParseFiles("ui/index.html")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

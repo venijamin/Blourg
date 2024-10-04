@@ -1,0 +1,7 @@
+<!-- templates/user-list.html -->
+
+<ul id="postList" hx-target="#postList">
+    {{range .}}
+    <li>{{.Username}}</li>
+    {{end}}
+</ul>

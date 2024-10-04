@@ -11,7 +11,7 @@ import (
 
 var postRepository repository.PostRepository
 
-var postTemplate = template.Must(template.ParseFiles("template/post-list.html"))
+var postTemplate = template.Must(template.ParseFiles("ui/post-list/post-list.html"))
 
 func GetAllPosts(w http.ResponseWriter, r *http.Request) {
 	posts := postRepository.GetAllPosts() // Fetch the posts from your repository

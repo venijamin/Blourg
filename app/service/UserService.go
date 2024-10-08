@@ -11,7 +11,7 @@ import (
 
 var userRepository repository.UserRepository
 
-var userTemplate = template.Must(template.ParseFiles("ui/user-list/user-list.html"))
+var userTemplate = template.Must(template.ParseFiles("src/user-list/user-list.html"))
 
 func GetAllUsers(w http.ResponseWriter, r *http.Request) {
 	users := userRepository.GetAllUsers()

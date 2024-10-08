@@ -32,13 +32,13 @@ func main() {
 	// Create a new router
 	router := mux.NewRouter()
 
-	router.PathPrefix("/ui/").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	router.PathPrefix("/src/").HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if strings.HasSuffix(r.URL.Path, ".css") {
 			// Set the correct MIME type for CSS files
 			w.Header().Set("Content-Type", "text/css")
 
 			// Serve the CSS file
-			http.StripPrefix("/ui/", http.FileServer(http.Dir("ui"))).ServeHTTP(w, r)
+			http.StripPrefix("/src/", http.FileServer(http.Dir("src"))).ServeHTTP(w, r)
 		} else {
 			http.NotFound(w, r) // Return 404 for non-CSS files
 		}
@@ -47,7 +47,16 @@ func main() {
 	// Define your routes
 
 	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		tmpl, err := template.ParseFiles("ui/index.html")
+		tmpl, err := template.ParseFiles("src/index.html")
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		tmpl.Execute(w, nil)
+	})
+
+	router.HandleFunc("/posts/create", func(w http.ResponseWriter, r *http.Request) {
+		tmpl, err := template.ParseFiles("src/post-form/post-form.html")
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return

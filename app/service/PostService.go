@@ -11,15 +11,13 @@ import (
 
 var postRepository repository.PostRepository
 
-var postTemplate = template.Must(template.ParseFiles("ui/post-list/post-list.html"))
-
 func GetAllPosts(w http.ResponseWriter, r *http.Request) {
-	posts := postRepository.GetAllPosts() // Fetch the posts from your repository
+	var postListTemplate = template.Must(template.ParseFiles("src/post-list/post-list.html"))
+	posts := postRepository.GetAllPosts()
 
-	w.Header().Set("Content-Type", "text/html")  // Set content type to text/html
-	w.Header().Set("HX-Trigger", "postsUpdated") // Optional: Trigger an HTMX event
+	w.Header().Set("Content-Type", "text/html")
 
-	if err := postTemplate.Execute(w, posts); err != nil {
+	if err := postListTemplate.Execute(w, posts); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
@@ -27,18 +25,40 @@ func GetAllPosts(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetPostById(w http.ResponseWriter, r *http.Request) {
+	var postTemplate = template.Must(template.ParseFiles("src/post/post-expanded.html"))
 	vars := mux.Vars(r)
 	postId, _ := vars["postId"]
 	_ = json.NewDecoder(r.Body).Decode(&postId)
 
-	json.NewEncoder(w).Encode(postRepository.GetPostById(postId))
+	w.Header().Set("Content-Type", "text/html")
+
+	post := postRepository.GetPostById(postId)
+	if err := postTemplate.Execute(w, post); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 }
 
 func CreatePost(w http.ResponseWriter, r *http.Request) {
-	var postCreation Post.PostCreationDTO
-	_ = json.NewDecoder(r.Body).Decode(&postCreation)
+	// Parse form data
+	if err := r.ParseForm(); err != nil {
+		http.Error(w, "Unable to parse form", http.StatusBadRequest)
+		return
+	}
 
+	// Create the PostCreationDTO from the form data
+	postCreation := Post.PostCreationDTO{
+		Username: r.FormValue("username"),
+		Title:    r.FormValue("title"),
+		Body:     r.FormValue("body"),
+	}
+
+	// Call your repository function to create the post
 	postRepository.CreatePost(postCreation)
+
+	// Optionally send a response back to the client
+	w.WriteHeader(http.StatusCreated)
+	json.NewEncoder(w).Encode(postCreation) // Sending the created post back
 }
 
 // DeletePost TODO: make it

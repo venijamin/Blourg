@@ -1,0 +1,21 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App</title>
+    <script src="https://unpkg.com/htmx.org"></script>
+</head>
+<body>
+
+
+<div  class="content">
+
+    <div hx-get="/posts" class="post-list" hx-trigger="load">
+    </div>
+    <div class="profile-bar">
+        <button hx-get="/posts" class="profile-bar-component sidebar-button">New Post</button>
+    </div>
+
+
+</div>
+</body>

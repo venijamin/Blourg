@@ -1,2 +1,2 @@
 # Blourg
-Blog site written in go and angular
+Blog site written in go and htmx

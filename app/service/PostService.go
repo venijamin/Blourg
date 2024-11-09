@@ -4,7 +4,6 @@ import (
 	"backend/model/Post"
 	"backend/repository"
 	"encoding/json"
-	"fmt"
 	"github.com/gorilla/mux"
 	"html/template"
 	"net/http"
@@ -59,10 +58,9 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 	// Optionally send a response back to HTMX
 	// Returning an HTML response (success message or the created post)
 	w.Header().Set("Content-Type", "text/html") // Set the correct content type for HTML response
-	w.WriteHeader(http.StatusCreated)
+	w.Header().Set("HX-Refresh", "true")
 
-	// Optionally, send HTML back (e.g., post details or a success message)
-	fmt.Fprintf(w, "<div class='alert alert-success'>Post created successfully! Title: %s</div>", postCreation.Title)
+	w.WriteHeader(http.StatusCreated)
 }
 
 // DeletePost TODO: make it

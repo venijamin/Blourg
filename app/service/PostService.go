@@ -4,6 +4,7 @@ import (
 	"backend/model/Post"
 	"backend/repository"
 	"encoding/json"
+	"fmt"
 	"github.com/gorilla/mux"
 	"html/template"
 	"net/http"
@@ -38,7 +39,6 @@ func GetPostById(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 }
-
 func CreatePost(w http.ResponseWriter, r *http.Request) {
 	// Parse form data
 	if err := r.ParseForm(); err != nil {
@@ -56,9 +56,13 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 	// Call your repository function to create the post
 	postRepository.CreatePost(postCreation)
 
-	// Optionally send a response back to the client
+	// Optionally send a response back to HTMX
+	// Returning an HTML response (success message or the created post)
+	w.Header().Set("Content-Type", "text/html") // Set the correct content type for HTML response
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(postCreation) // Sending the created post back
+
+	// Optionally, send HTML back (e.g., post details or a success message)
+	fmt.Fprintf(w, "<div class='alert alert-success'>Post created successfully! Title: %s</div>", postCreation.Title)
 }
 
 // DeletePost TODO: make it

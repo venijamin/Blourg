@@ -12,7 +12,7 @@ import (
 var postRepository repository.PostRepository
 
 func GetAllPosts(w http.ResponseWriter, r *http.Request) {
-	var postListTemplate = template.Must(template.ParseFiles("src/post-list/post-list.html"))
+	var postListTemplate = template.Must(template.ParseFiles("src/template/post-list.html"))
 	posts := postRepository.GetAllPosts()
 
 	w.Header().Set("Content-Type", "text/html")
@@ -25,7 +25,7 @@ func GetAllPosts(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetPostById(w http.ResponseWriter, r *http.Request) {
-	var postTemplate = template.Must(template.ParseFiles("src/post/post-expanded.html"))
+	var postTemplate = template.Must(template.ParseFiles("src/template/post-expanded.html"))
 	vars := mux.Vars(r)
 	postId, _ := vars["postId"]
 	_ = json.NewDecoder(r.Body).Decode(&postId)

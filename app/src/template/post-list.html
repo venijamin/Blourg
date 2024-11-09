@@ -1,0 +1,9 @@
+{{range .}}
+<button>
+    <a href="/posts/{{ .PostId }}">
+        <div>{{ .Title }}</div>
+        <div>{{ .Body }}</div>
+        <div>{{ .Username }}</div>
+    </a>
+</button>
+{{end}}

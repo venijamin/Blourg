@@ -34,6 +34,11 @@ func (repo PostRepository) CreatePost(dto Post.PostCreationDTO) Post.Post {
 
 	return post
 }
+func (repo PostRepository) DeletePostById(id string) {
+	var post Post.Post
+	security.GetMainDB().Where("post_id", id).First(&post).Delete(&post)
+
+}
 
 func (repo PostRepository) GetAllCommentsForPost(postId string) []Comment.Comment {
 	var comments []Comment.Comment

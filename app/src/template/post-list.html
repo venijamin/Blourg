@@ -6,4 +6,8 @@
         <div>{{ .Username }}</div>
     </a>
 </button>
+<form hx-delete="/posts/{{ .PostId }}" method="DELETE">
+    <button type="submit">Delete</button>
+
+</form>
 {{end}}

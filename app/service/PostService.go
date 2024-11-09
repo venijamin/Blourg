@@ -63,12 +63,15 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 }
 
-// DeletePost TODO: make it
-func DeletePost(w http.ResponseWriter, r *http.Request) {
+func DeletePostById(w http.ResponseWriter, r *http.Request) {
 
-	var postId string
+	vars := mux.Vars(r)
+	postId, _ := vars["postId"]
 	_ = json.NewDecoder(r.Body).Decode(&postId)
 
+	w.Header().Set("HX-Refresh", "true")
+
+	postRepository.DeletePostById(postId)
 }
 
 func GetAllCommentsForPost(w http.ResponseWriter, r *http.Request) {

@@ -1,13 +1,22 @@
 {{range .}}
-<button>
+<!-- Post content with a link to view the post -->
+<div class="post-item">
     <a href="/posts/{{ .PostId }}">
         <div>{{ .Title }}</div>
         <div>{{ .Body }}</div>
         <div>{{ .Username }}</div>
     </a>
-</button>
-<form hx-delete="/posts/{{ .PostId }}" method="DELETE">
-    <button type="submit">Delete</button>
+</div>
 
+<!-- Delete form with HTMX for deletion -->
+<form hx-delete="/posts/{{ .PostId }}" method="DELETE" hx-target=".post-item" hx-swap="outerHTML">
+    <button type="submit" class="btn btn-danger">Delete</button>
 </form>
+
+<!-- Edit Button -->
+<button hx-trigger="click" hx-target="#post-1" hx-swap="outerHTML">
+    Edit Post
+</button>
+
+
 {{end}}

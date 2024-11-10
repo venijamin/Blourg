@@ -73,6 +73,7 @@ func main() {
 	router.HandleFunc("/posts", service.GetAllPosts).Methods("GET")
 	router.HandleFunc("/posts", service.CreatePost).Methods("POST")
 	router.HandleFunc("/posts/{postId}", service.GetPostById).Methods("GET")
+	router.HandleFunc("/posts/{postId}", service.UpdatePost).Methods("POST")
 	router.HandleFunc("/posts/{postId}", service.DeletePostById).Methods("DELETE")
 	router.HandleFunc("/posts/{postId}/comments", service.GetAllCommentsForPost).Methods("GET")
 

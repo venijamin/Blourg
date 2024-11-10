@@ -10,6 +10,16 @@ import (
 	"strings"
 )
 
+/*
+TODO: Fix the user_sessions,
+TODO: currently when a user logs into the system it generates a
+TODO: session token which is stored as a cookie along side the username of the user.
+TODO: This works but it doesn't get used anywhere.
+TODO: I need to fix the logic of checking the session tokens validity, removing the token after a period of time
+TODO: and logging the user out which removes that specific session token from the db.
+TODO: Also hiding of auth-links no longer works for some reason.
+*/
+
 // CORS middleware function
 func CORS(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -70,6 +80,7 @@ func main() {
 	router.HandleFunc("/register", service.GetRegisterPage).Methods("GET")
 	router.HandleFunc("/users/login", service.LoginUser).Methods("POST")
 	router.HandleFunc("/users/delete", service.DeleteUser).Methods("DELETE")
+	router.HandleFunc("/auth-links", service.RenderLoginLinks).Methods("GET")
 
 	router.HandleFunc("/comments", service.CreateComment).Methods("POST")
 	router.HandleFunc("/posts", service.GetAllPosts).Methods("GET")

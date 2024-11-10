@@ -15,11 +15,3 @@ func GenerateSessionToken() (string, string) {
 
 	return sessionToken, string(encoded)
 }
-
-func VerifySession(sessionToken, encoded string) bool {
-	isMatch, err := argon2.VerifyEncoded([]byte(sessionToken), []byte(encoded))
-	if err != nil {
-		panic(err)
-	}
-	return isMatch
-}

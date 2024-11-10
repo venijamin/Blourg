@@ -67,21 +67,13 @@ func (repo UserRepository) ChangePassword(email string, username string, passwor
 // DeleteUser checks if the user sessionToken and the passwords are correct to validate the delete process
 // TODO: fix it doesn't work well
 func (repo UserRepository) DeleteUser(userDelete User.UserDeleteDTO) bool {
-	username := userDelete.Username
-	password := userDelete.Password
-	sessionToken := userDelete.SessionToken
-
-	user := repo.GetUserByUsername(username)
-	var userSessions []User.UserSession
-	security.GetUserSessionsDB().Where("username = ?", username).Find(&userSessions)
-
-	for _, userSession := range userSessions {
-		if security.VerifyPassword(password, user.Password) && security.VerifySession(sessionToken, userSession.SessionToken) {
-			security.GetMainDB().Delete(&user)
-			security.GetUserSessionsDB().Delete(&userSessions)
-			return true
-		}
-	}
+	//username := userDelete.Username
+	//password := userDelete.Password
+	//sessionToken := userDelete.SessionToken
+	//
+	//user := repo.GetUserByUsername(username)
+	//var userSessions []User.UserSession
+	//security.GetUserSessionsDB().Where("username = ?", username).Find(&userSessions)
 
 	return false
 }

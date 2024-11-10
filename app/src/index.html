@@ -7,8 +7,9 @@
 </head>
 <body>
 Welcome to Blourg.com, one of the blog posting websites across the world.
-<a href="#" hx-get="/login" hx-target="#modal-content" hx-trigger="click">Log In</a> |
-<a href="#" hx-get="/register" hx-target="#modal-content" hx-trigger="click">Register</a>
+<div id="auth-links">
+  <a href="/users/logout" hx-get="/auth-links" hx-target="#auth-links" hx-trigger="load">Loading...</a>
+</div>
 
 <!-- Modal -->
 <div id="modal" class="modal">

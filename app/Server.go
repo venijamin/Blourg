@@ -66,6 +66,8 @@ func main() {
 
 	router.HandleFunc("/users", service.GetAllUsers).Methods("GET")
 	router.HandleFunc("/users/register", service.RegisterUser).Methods("POST")
+	router.HandleFunc("/login", service.GetLoginPage).Methods("GET")
+	router.HandleFunc("/register", service.GetRegisterPage).Methods("GET")
 	router.HandleFunc("/users/login", service.LoginUser).Methods("POST")
 	router.HandleFunc("/users/delete", service.DeleteUser).Methods("DELETE")
 

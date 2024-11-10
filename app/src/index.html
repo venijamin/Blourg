@@ -7,7 +7,19 @@
 </head>
 <body>
 Welcome to Blourg.com, one of the blog posting websites across the world.
+<a href="#" hx-get="/login" hx-target="#modal-content" hx-trigger="click">Log In</a> |
+<a href="#" hx-get="/register" hx-target="#modal-content" hx-trigger="click">Register</a>
+
+<!-- Modal -->
+<div id="modal" class="modal">
+  <div class="modal-content" id="modal-content">
+    <span class="close" id="closeModal">&times;</span>
+    <!-- The form content will be swapped here -->
+  </div>
+</div>
+
 <br/>
+
 <form hx-post="/posts" method="POST">
   <div id="post-creation-form">
     <input type="text" class="form-control" name="username" placeholder="Username" required>
@@ -18,6 +30,7 @@ Welcome to Blourg.com, one of the blog posting websites across the world.
     <button type="submit" class="btn btn-primary">Save</button>
   </div>
 </form>
+
 <div hx-get="/posts" hx-trigger="load">
 </div>
 

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://unpkg.com/htmx.org@2.0.3/dist/htmx.js" integrity="sha384-BBDmZzVt6vjz5YbQqZPtFZW82o8QotoM7RUp5xOxV3nSJ8u2pSdtzFAbGKzTlKtg" crossorigin="anonymous"></script>
+</head>
+<body>
+    Welcome to Blourg.com!
+    <a href="#" hx-get="login-form.html" hx-target="#modal-content" hx-trigger="click">Log In</a> |
+    <a href="#" hx-get="register-form.html" hx-target="#modal-content" hx-trigger="click">Register</a>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content" id="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <!-- The form content will be swapped here -->
+        </div>
+    </div>
+
+</body>
+</html>

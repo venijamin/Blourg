@@ -27,6 +27,17 @@ func GetAllPosts(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func ServeNewPost(w http.ResponseWriter, r *http.Request) {
+	var postTemplate = template.Must(template.ParseFiles("src/template/new-post.html"))
+
+	w.Header().Set("Content-Type", "text/html")
+
+	if err := postTemplate.Execute(w, r); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+}
 func GetPostById(w http.ResponseWriter, r *http.Request) {
 	var postTemplate = template.Must(template.ParseFiles("src/template/post.html"))
 	vars := mux.Vars(r)
@@ -99,12 +110,9 @@ func CreatePost(w http.ResponseWriter, r *http.Request) {
 	// Call your repository function to create the post
 	postRepository.CreatePost(postCreation)
 
-	// Optionally send a response back to HTMX
-	// Returning an HTML response (success message or the created post)
 	w.Header().Set("Content-Type", "text/html") // Set the correct content type for HTML response
-	w.Header().Set("HX-Refresh", "true")
-
-	w.WriteHeader(http.StatusCreated)
+	w.Header().Set("Location", "/")
+	w.WriteHeader(http.StatusSeeOther)
 }
 
 func UpdatePost(w http.ResponseWriter, r *http.Request) {

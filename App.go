@@ -56,6 +56,8 @@ func SetRoutes(router *mux.Router) {
 	router.HandleFunc("/sign-in", service.Signin).Methods("POST")
 	router.HandleFunc("/sign-in", service.ServeSignin).Methods("GET")
 
+	router.HandleFunc("/new-post", service.ServeNewPost).Methods("GET")
+
 	router.HandleFunc("/sign-up", service.Signup).Methods("POST")
 	router.HandleFunc("/sign-up", service.ServeSignup).Methods("GET")
 

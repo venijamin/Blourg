@@ -1,0 +1,20 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link type="text/css" rel="stylesheet" href="/src/bootstrap.css">
+  <title>Sign in</title>
+</head>
+<body>
+<h2>Sign in</h2>
+<form id="form" hx-post="/sign-in" hx-target="#form" hx-swap="outerHTML">
+  <input class="input-group-text" type="text" name="username" placeholder="Enter Username" required><br>
+  <input class="input-group-text" type="password" name="password" placeholder="Enter Password" required><br>
+  <input class="btn btn-primary" type="submit" value="Sign in">
+  <a class="btn btn-outline-secondary" href="/">Back</a>
+</form>
+<script src="https://unpkg.com/htmx.org"></script>
+</body>
+</html>

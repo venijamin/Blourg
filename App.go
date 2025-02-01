@@ -51,8 +51,9 @@ func SetRoutes(router *mux.Router) {
 	//	tmpl.Execute(w, nil)
 	//}
 
-	router.HandleFunc("/users/{userUUID}}", service.GetUserProfile).Methods("POST")
-	router.HandleFunc("/my-profile", service.GetUserProfile).Methods("GET")
+	//router.HandleFunc("/users/{userUUID}}", service.GetUserProfile).Methods("POST")
+	//router.HandleFunc("/my-profile", service.GetUserProfile).Methods("GET")
+
 	router.HandleFunc("/sign-in", service.Signin).Methods("POST")
 	router.HandleFunc("/sign-in", service.ServeSignin).Methods("GET")
 
@@ -60,8 +61,8 @@ func SetRoutes(router *mux.Router) {
 
 	router.HandleFunc("/new-post", service.ServeNewPost).Methods("GET")
 
-	router.HandleFunc("/sign-up", service.Signup).Methods("POST")
-	router.HandleFunc("/sign-up", service.ServeSignup).Methods("GET")
+	//router.HandleFunc("/sign-up", service.Signup).Methods("POST")
+	//router.HandleFunc("/sign-up", service.ServeSignup).Methods("GET")
 
 	router.HandleFunc("/sign-out", service.Signout).Methods("GET")
 

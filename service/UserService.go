@@ -295,3 +295,8 @@ func GetUserProfile(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
+
+func ServeAboutMe(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("src/about-me.html")
+	t.Execute(w, nil)
+}

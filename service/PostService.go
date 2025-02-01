@@ -28,7 +28,18 @@ func GetAllPosts(w http.ResponseWriter, r *http.Request) {
 }
 
 func ServeNewPost(w http.ResponseWriter, r *http.Request) {
-	var postTemplate = template.Must(template.ParseFiles("src/template/new-post.html"))
+	var postTemplate = template.Must(template.ParseFiles("src/new-post.html"))
+	_, err := r.Cookie("token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			// If the cookie is not set, return an unauthorized status
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		// For any other type of error, return a bad request status
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
 
 	w.Header().Set("Content-Type", "text/html")
 
@@ -39,7 +50,7 @@ func ServeNewPost(w http.ResponseWriter, r *http.Request) {
 
 }
 func GetPostById(w http.ResponseWriter, r *http.Request) {
-	var postTemplate = template.Must(template.ParseFiles("src/template/post.html"))
+	var postTemplate = template.Must(template.ParseFiles("src/post.html"))
 	vars := mux.Vars(r)
 	postId, _ := vars["postId"]
 	_ = json.NewDecoder(r.Body).Decode(&postId)

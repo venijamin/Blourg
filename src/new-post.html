@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create new post - blourg.com</title>
+    <link type="text/css" rel="stylesheet" href="/src/css/tailwind/output.css">
+</head>
+<body class="min-h-screen bg-gradient-to-br from-sky-100 via-teal-50 to-emerald-100 p-8 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+
+<form id="form"
+      class="mx-auto max-w-2xl rounded-3xl border border-white/20 bg-white/30 p-8 shadow-lg backdrop-blur-md dark:bg-white/5"
+      hx-post="/posts" hx-target="#form" hx-swap="outerHTML">
+    <!-- Title Input -->
+    <div class="mb-6 relative">
+        <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-sky-400/20 to-teal-400/20 blur-md"></div>
+        <input
+                type="text"
+                name="title"
+                placeholder="Title..."
+                required
+                class="relative w-full rounded-xl border border-white/20 bg-white/30 p-4 text-gray-700 placeholder-gray-400 shadow-inner backdrop-blur-sm transition-all duration-300 focus:border-sky-300/50 focus:outline-none focus:ring-2 focus:ring-sky-300/25 dark:bg-white/10 dark:text-gray-200 dark:placeholder-gray-500"
+        >
+    </div>
+
+    <!-- Body Textarea -->
+    <div class="mb-6 relative">
+        <div class="absolute inset-0 rounded-xl bg-gradient-to-r from-sky-400/20 to-teal-400/20 blur-md"></div>
+        <textarea
+                name="body"
+                placeholder="Body..."
+                required
+                class="relative h-48 w-full rounded-xl border border-white/20 bg-white/30 p-4 text-gray-700 placeholder-gray-400 shadow-inner backdrop-blur-sm transition-all duration-300 focus:border-sky-300/50 focus:outline-none focus:ring-2 focus:ring-sky-300/25 dark:bg-white/10 dark:text-gray-200 dark:placeholder-gray-500"
+        ></textarea>
+    </div>
+
+    <!-- Buttons Container -->
+    <div class="flex gap-4">
+        <!-- Submit Button -->
+        <button type="submit" class="group relative flex-1">
+            <div class="relative overflow-hidden rounded-xl border border-white/20 bg-gradient-to-r from-sky-400/80 to-teal-400/80 px-6 py-3 shadow-lg transition-all duration-300 hover:from-sky-500/80 hover:to-teal-500/80">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.4),transparent_60%)]"></div>
+                <span class="relative block text-center font-medium text-white">Create post</span>
+            </div>
+        </button>
+
+        <!-- Back Button -->
+        <a href="/" class="group relative flex-1">
+            <div class="relative overflow-hidden rounded-xl border border-white/20 bg-gradient-to-r from-gray-500/80 to-gray-400/80 px-6 py-3 shadow-lg transition-all duration-300 hover:from-gray-600/80 hover:to-gray-500/80">
+                <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.3),transparent_60%)]"></div>
+                <span class="relative block text-center font-medium text-white">Back</span>
+            </div>
+        </a>
+    </div>
+</form>
+
+<script src="https://unpkg.com/htmx.org"></script>
+</body>
+</html>

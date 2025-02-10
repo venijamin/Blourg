@@ -7,16 +7,17 @@
         <!-- Content container -->
         <div class="relative z-10">
             <!-- Title with glass button effect -->
-            <h2 class="relative bg-gradient-to-r from-white to-white/90 bg-clip-text text-xl font-medium text-transparent">
+            <h2 class="relative bg-gradient-to-r from-gray-800 to-gray-900 bg-clip-text text-xl font-medium text-transparent">
                 {{ .Title }}
             </h2>
 
             <!-- Body text with subtle gradient -->
             <div class="relative overflow-hidden rounded-xl border border-white/10 bg-white/10 p-4 shadow-inner">
-                <p class="bg-gradient-to-r from-gray-700 to-gray-600 bg-clip-text text-transparent dark:from-gray-200 dark:to-gray-300">
+                <p class="bg-gradient-to-r from-gray-700 to-gray-600 bg-clip-text text-transparent dark:from-gray-200 dark:to-gray-300 whitespace-normal break-words">
                     {{ .Body }}
                 </p>
             </div>
+
         </div>
 
         <!-- Decorative elements -->

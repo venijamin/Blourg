@@ -8,10 +8,30 @@ import (
 
 type PostRepository struct{}
 
-func (repo PostRepository) GetAllPosts() []Post.Post {
+func (repo PostRepository) GetAllPosts() []Post.PostPreviewDTO {
 	var posts []Post.Post
 	security.GetMainDB().Find(&posts)
-	return posts
+	var postsPreviews []Post.PostPreviewDTO
+	for _, post := range posts {
+		bodyPreview := ""
+		if len(post.Body) < 170 {
+			bodyPreview = post.Body
+		} else {
+			bodyPreview = post.Body[:170]
+			bodyPreview += "..."
+		}
+
+		postsPreviews = append(postsPreviews, Post.PostPreviewDTO{
+			PostUUID: post.PostUUID,
+			UserUUID: post.UserUUID,
+			Title:    post.Title,
+			Body:     bodyPreview,
+			UpVote:   post.UpVote,
+			DownVote: post.DownVote,
+		})
+	}
+
+	return postsPreviews
 }
 
 func (repo PostRepository) GetPostById(id string) Post.Post {

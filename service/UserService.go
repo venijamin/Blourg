@@ -173,7 +173,7 @@ func Signin(w http.ResponseWriter, r *http.Request) {
 	hashedPassword, err := userRepository.GetPasswordByUsername(creds.Username)
 	if err != nil {
 		log.Println(err)
-		w.WriteHeader(http.StatusInternalServerError)
+		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}
 	err = bcrypt.CompareHashAndPassword([]byte(hashedPassword), []byte(creds.Password))

@@ -4,6 +4,7 @@ import (
 	"blourg/model/Post"
 	"blourg/utils/security"
 	"github.com/google/uuid"
+	"time"
 )
 
 type PostRepository struct{}
@@ -22,12 +23,13 @@ func (repo PostRepository) GetAllPosts() []Post.PostPreviewDTO {
 		}
 
 		postsPreviews = append(postsPreviews, Post.PostPreviewDTO{
-			PostUUID: post.PostUUID,
-			UserUUID: post.UserUUID,
-			Title:    post.Title,
-			Body:     bodyPreview,
-			UpVote:   post.UpVote,
-			DownVote: post.DownVote,
+			PostUUID:     post.PostUUID,
+			UserUUID:     post.UserUUID,
+			Title:        post.Title,
+			Body:         bodyPreview,
+			UpVote:       post.UpVote,
+			DownVote:     post.DownVote,
+			CreationDate: post.CreationDate,
 		})
 	}
 
@@ -42,12 +44,13 @@ func (repo PostRepository) GetPostById(id string) Post.Post {
 
 func (repo PostRepository) CreatePost(dto Post.PostCreationDTO) Post.Post {
 	post := Post.Post{
-		PostUUID: uuid.New().String(),
-		UserUUID: dto.UserUUID,
-		Title:    dto.Title,
-		Body:     dto.Body,
-		UpVote:   0,
-		DownVote: 0,
+		PostUUID:     uuid.New().String(),
+		UserUUID:     dto.UserUUID,
+		Title:        dto.Title,
+		Body:         dto.Body,
+		UpVote:       0,
+		DownVote:     0,
+		CreationDate: time.Now().Format("2006-01-02 15:04:05"),
 	}
 	security.GetMainDB().Create(post)
 
